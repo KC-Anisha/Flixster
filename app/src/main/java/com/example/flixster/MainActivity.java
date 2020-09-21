@@ -1,18 +1,22 @@
 package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.flixster.adapters.MovieAdapter;
 import com.example.flixster.models.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -29,6 +33,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RecyclerView rvMovies = findViewById(R.id.rvMovies);
+        movies = new ArrayList<>();
+
+        // Create an adapter
+        final MovieAdapter movieAdapter = new MovieAdapter(this, movies);
+
+        // Set the adapter on the RecyclerView
+        rvMovies.setAdapter(movieAdapter);
+
+        // Set the layout manager on the RecyclerView
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
         // HTTP Client
         AsyncHttpClient client = new AsyncHttpClient();
@@ -39,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    movies = Movie.fromJsonArray(results);
-                    Log.i(TAG, "Movies" + movies.size());
+                    movies.addAll(Movie.fromJsonArray(results));
+                    movieAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit JSON Exception", e);
                 }
@@ -48,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-
+                Log.d(TAG, "onFailure");
             }
         });
     }
