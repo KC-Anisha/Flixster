@@ -23,8 +23,6 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ![Demo of Part 2 of the Application](part2demo.gif) 
 
-<img src="YOUR_GIF_URL_HERE" width=250><br>
-
 ### Notes
 
 I had trouble getting the rounded corners using Glide Transformations.
