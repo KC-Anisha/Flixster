@@ -12,7 +12,7 @@
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="250dp" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -20,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/player"
         android:layout_marginTop="47dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         tools:text="Title of the Movie" />
@@ -30,7 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_marginTop="26dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="32dp"
         android:background="#666666"
         android:isIndicator="true"
         android:numStars="10"
@@ -42,7 +46,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ratingBar"
-        android:layout_marginTop="23dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="textStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#FFFFFF"
         tools:text="Summary of the Movie" />
 </RelativeLayout>
